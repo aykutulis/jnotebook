@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import * as esbuild from 'esbuild-wasm/esm/browser';
+import { unpkgPathPlugin } from './plugins/unpkgPathPlugin';
 
-function App() {
+const App: React.FC = () => {
+  const [input, setInput] = useState('');
+  const [code, setCode] = useState('');
+
+  const startService = async () => {
+    await esbuild.initialize({
+      worker: true,
+      wasmURL: '/esbuild.wasm',
+    });
+  };
+
+  useEffect(() => {
+    startService();
+  }, []);
+
+  const handleClick = async () => {
+    const result = await esbuild.build({
+      entryPoints: ['index.js'],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin()],
+    });
+
+    setCode(result.outputFiles[0].text);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <textarea value={input} onChange={(e) => setInput(e.target.value)}></textarea>
+      <div>
+        <button onClick={handleClick}>Submit</button>
+      </div>
+      <pre>{code}</pre>
     </div>
   );
-}
+};
 
 export default App;
