@@ -4,10 +4,10 @@ import { unpkgPathPlugin } from './plugins/unpkgPathPlugin';
 import { fetchPlugin } from './plugins/fetchPlugin';
 
 const App: React.FC = () => {
-  const [input, setInput] = useState('');
-  const [code, setCode] = useState('');
-
   const ref = useRef(false);
+  const iframe = useRef<any>();
+
+  const [input, setInput] = useState('');
 
   const startService = async () => {
     await esbuild.initialize({
@@ -25,6 +25,8 @@ const App: React.FC = () => {
   const handleClick = async () => {
     if (!ref.current) return;
 
+    iframe.current.srcdoc = html;
+
     const result = await esbuild.build({
       entryPoints: ['index.js'],
       bundle: true,
@@ -36,8 +38,27 @@ const App: React.FC = () => {
       },
     });
 
-    setCode(result.outputFiles[0].text);
+    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
   };
+
+  const html = `
+    <html>
+      <head></head>
+      <body>
+        <div id="root"></div>
+        <script>
+          window.addEventListener('message', (event) => {
+            try {
+              eval(event.data);
+            } catch (error) {
+              const rootEl = document.getElementById('root');
+              rootEl.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>';
+            }
+          }, false)
+        </script>
+      </body>
+    </html>
+  `;
 
   return (
     <div>
@@ -45,7 +66,7 @@ const App: React.FC = () => {
       <div>
         <button onClick={handleClick}>Submit</button>
       </div>
-      <pre>{code}</pre>
+      <iframe sandbox='allow-scripts' srcDoc={html} ref={iframe} title='preview'></iframe>
     </div>
   );
 };
