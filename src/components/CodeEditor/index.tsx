@@ -4,7 +4,7 @@ import prettier from 'prettier';
 import parserBabel from 'prettier/parser-babel';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
-import './CodeEditor.css';
+import './index.css';
 
 interface CodeEditorProps {
   onChange: OnChange;
