@@ -23,7 +23,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, input, setInput }) =>
         singleQuote: true,
       })
       .replace(/\n$/, '');
-
     setInput(formatted);
   };
 
@@ -51,7 +50,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, input, setInput }) =>
         value={input}
         onChange={onChange}
         onMount={handleEditorOnMount}
-        height='500px'
+        height='100%'
         theme='vs-dark'
         language='javascript'
         options={{

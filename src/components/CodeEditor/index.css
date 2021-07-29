@@ -1,5 +1,7 @@
 .editor-wrapper {
   position: relative;
+  width: calc(100% - 10px);
+  height: 100%;
 }
 
 .editor-wrapper .button-format {

@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import bundler from '../..//bundler';
 import CodeEditor from '../CodeEditor';
 import Preview from '../Preview';
+import Resizable from '../Resizable';
 
 const CodeCell: React.FC = () => {
   const [input, setInput] = useState('const x = 5;');
   const [code, setCode] = useState('');
 
-  const handleClick = async () => {
-    const output = await bundler(input);
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const output = await bundler(input);
 
-    setCode(output);
-  };
+      setCode(output);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [input]);
 
   return (
-    <div>
-      <CodeEditor input={input} setInput={setInput} onChange={(value) => setInput(value || '')} />
-      <div>
-        <button onClick={handleClick}>Submit</button>
+    <Resizable direction='vertical'>
+      <div style={{ display: 'flex', height: '100%' }}>
+        <Resizable direction='horizontal'>
+          <CodeEditor input={input} setInput={setInput} onChange={(value) => setInput(value || '')} />
+        </Resizable>
+        <Preview code={code} />
       </div>
-      <Preview code={code} />
-    </div>
+    </Resizable>
   );
 };
 
