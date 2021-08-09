@@ -24,7 +24,6 @@ const TextEditor: React.FC = () => {
     return (
       <div className='text-editor' ref={ref}>
         <MDEditor value={text} onChange={(value) => setText(value || '')} />
-        <textarea>asdasdasdasdasd</textarea>
       </div>
     );
   }
