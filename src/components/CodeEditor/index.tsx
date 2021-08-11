@@ -9,21 +9,28 @@ import './index.css';
 interface CodeEditorProps {
   onChange: OnChange;
   input: string;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
+  initialValue?: string;
+  onFormat?: (value: string) => void;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, input, setInput }) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, initialValue }) => {
   const handleOnFormat = () => {
-    const formatted = prettier
-      .format(input, {
-        parser: 'babel',
-        plugins: [parserBabel],
-        useTabs: false,
-        semi: true,
-        singleQuote: true,
-      })
-      .replace(/\n$/, '');
-    setInput(formatted);
+    if (!onFormat) return;
+
+    try {
+      const formatted = prettier
+        .format(input, {
+          parser: 'babel',
+          plugins: [parserBabel],
+          useTabs: false,
+          semi: true,
+          singleQuote: true,
+        })
+        .replace(/\n$/, '');
+      onFormat(formatted);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEditorOnMount: OnMount = (monacoEditor) => {
@@ -48,6 +55,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, input, setInput }) =>
       </button>
       <Editor
         value={input}
+        defaultValue={initialValue}
         onChange={onChange}
         onMount={handleEditorOnMount}
         height='100%'

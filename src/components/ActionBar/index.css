@@ -1,0 +1,10 @@
+.action-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.action-bar button {
+  border-radius: 0 !important;
+}
