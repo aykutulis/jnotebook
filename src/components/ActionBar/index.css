@@ -2,9 +2,10 @@
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 5;
+  opacity: 0.4;
+  transition: opacity 0.3s;
 }
 
-.action-bar button {
-  border-radius: 0 !important;
+.action-bar:hover {
+  opacity: 1;
 }

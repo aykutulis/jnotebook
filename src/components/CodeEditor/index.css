@@ -10,7 +10,6 @@
   right: 5px;
   z-index: 55;
   opacity: 0;
-  border-radius: 0;
   transition: opacity 0.3s ease;
 }
 

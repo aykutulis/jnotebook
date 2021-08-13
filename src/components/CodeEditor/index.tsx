@@ -50,7 +50,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, init
 
   return (
     <div className='editor-wrapper'>
-      <button className='button button-format is-warning is-small' onClick={handleOnFormat}>
+      <button className='button button-format is-primary is-small' onClick={handleOnFormat}>
         Format
       </button>
       <Editor

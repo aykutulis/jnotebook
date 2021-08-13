@@ -8,17 +8,17 @@ const middlewares = [thunk];
 export const store = createStore(reducers, {}, applyMiddleware(...middlewares));
 
 store.dispatch({
-  type: ActionType.INSERT_CELL_BEFORE,
+  type: ActionType.INSERT_CELL_AFTER,
   payload: {
     id: null,
-    type: 'code',
+    type: 'text',
   },
 });
 
 store.dispatch({
-  type: ActionType.INSERT_CELL_BEFORE,
+  type: ActionType.INSERT_CELL_AFTER,
   payload: {
     id: null,
-    type: 'text',
+    type: 'code',
   },
 });
