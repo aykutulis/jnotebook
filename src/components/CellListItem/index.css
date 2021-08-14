@@ -1,17 +1,5 @@
-@keyframes scale {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
-
 .cell-list-item {
   position: relative;
-  animation: scale 0.4s ease forwards;
-  transform-origin: left;
 }
 
 .action-bar-wrapper {

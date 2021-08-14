@@ -1,19 +1,21 @@
 import produce from 'immer';
 import { Reducer } from 'redux';
 import { BundleActionType } from '../actionTypes';
-import { BundleAction } from '../actions';
+import { Action } from '../actions';
 
 interface BundlesState {
-  [key: string]: {
-    loading: boolean;
-    code: string;
-    error: string;
-  };
+  [key: string]:
+    | {
+        loading: boolean;
+        code: string;
+        error: string;
+      }
+    | undefined;
 }
 
 const initialState: BundlesState = {};
 
-const reducer: Reducer<BundlesState, BundleAction> = produce((state = initialState, action) => {
+const reducer: Reducer<BundlesState, Action> = produce((state = initialState, action) => {
   switch (action.type) {
     case BundleActionType.BUNDLE_START:
       state[action.payload.cellId] = {

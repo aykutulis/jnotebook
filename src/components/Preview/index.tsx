@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import './index.css';
 
 interface PreviewProps {
-  code: string;
-  err: string;
+  code?: string;
+  err?: string;
 }
 
 const html = `
@@ -42,11 +42,13 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
-    iframe.current.srcdoc = html;
-    setTimeout(() => {
-      iframe.current.contentWindow.postMessage(code, '*');
-    }, 100);
-  }, [code]);
+    if (code || err) {
+      iframe.current.srcdoc = html;
+      setTimeout(() => {
+        iframe.current?.contentWindow?.postMessage(code, '*');
+      }, 100);
+    }
+  }, [code, err]);
 
   return (
     <div className='preview-wrapper'>

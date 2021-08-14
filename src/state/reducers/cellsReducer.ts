@@ -1,5 +1,5 @@
 import { CellActionType } from '../actionTypes';
-import { CellAction } from '../actions';
+import { Action } from '../actions';
 import { Cell } from './../Cell';
 import { Reducer } from 'redux';
 import produce from 'immer';
@@ -20,7 +20,7 @@ const initialState: CellsState = {
   data: {},
 };
 
-const reducer: Reducer<CellsState, CellAction> = produce((state = initialState, action) => {
+const reducer: Reducer<CellsState, Action> = produce((state = initialState, action) => {
   switch (action.type) {
     case CellActionType.UPDATE_CELL:
       const { id, content } = action.payload;
