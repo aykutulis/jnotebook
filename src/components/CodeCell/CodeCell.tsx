@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import CodeEditor from '../CodeEditor';
-import Preview from '../Preview';
-import Resizable from '../Resizable';
+import { CodeEditor } from '../CodeEditor';
+import { Preview } from '../Preview';
+import { Resizable } from '../Resizable';
 import { Loading } from '../Loading';
+import { StyledPreviewContainer } from './CodeCell.style';
 import { useActions, useTypedSelector } from '../../hooks';
 import { Cell } from '../../state';
-import './index.css';
 
 interface CodeCellProps {
   cell: Cell;
 }
 
-const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
+export const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
   const { updateCell, createBundle } = useActions();
   const bundle = useTypedSelector((state) => state.bundles[cell.id]);
 
@@ -46,13 +46,11 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onFormat={handleUpdateCell}
           />
         </Resizable>
-        <div className='preview-container'>
+        <StyledPreviewContainer>
           <Preview code={bundle?.code} err={bundle?.error} />
           {!bundle || (bundle.loading && <Loading />)}
-        </div>
+        </StyledPreviewContainer>
       </div>
     </Resizable>
   );
 };
-
-export default CodeCell;

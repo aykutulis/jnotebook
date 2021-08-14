@@ -4,7 +4,7 @@ import prettier from 'prettier';
 import parserBabel from 'prettier/parser-babel';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
-import './index.css';
+import { StyledCodeEditor } from './CodeEditor.style';
 
 interface CodeEditorProps {
   onChange: OnChange;
@@ -13,7 +13,7 @@ interface CodeEditorProps {
   onFormat?: (value: string) => void;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, initialValue }) => {
+export const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, initialValue }) => {
   const handleOnFormat = () => {
     if (!onFormat) return;
 
@@ -49,7 +49,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, init
   };
 
   return (
-    <div className='editor-wrapper'>
+    <StyledCodeEditor>
       <button className='button button-format is-primary is-small' onClick={handleOnFormat}>
         Format
       </button>
@@ -72,8 +72,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, init
           tabSize: 2,
         }}
       />
-    </div>
+    </StyledCodeEditor>
   );
 };
-
-export default CodeEditor;

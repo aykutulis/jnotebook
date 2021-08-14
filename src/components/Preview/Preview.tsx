@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './index.css';
+import { StyledPreview } from './Preview.style';
 
 interface PreviewProps {
   code?: string;
@@ -38,7 +38,7 @@ const html = `
     </html>
   `;
 
-const Preview: React.FC<PreviewProps> = ({ code, err }) => {
+export const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
@@ -51,11 +51,9 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   }, [code, err]);
 
   return (
-    <div className='preview-wrapper'>
+    <StyledPreview>
       <iframe sandbox='allow-scripts' srcDoc={html} ref={iframe} title='preview' />
       {err && <div className='preview-error'>{err}</div>}
-    </div>
+    </StyledPreview>
   );
 };
-
-export default Preview;

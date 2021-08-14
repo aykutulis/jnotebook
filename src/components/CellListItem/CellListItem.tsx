@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import { Cell } from '../../state';
-import CodeCell from '../CodeCell';
-import TextEditor from '../TextEditor';
-import ActionBar from '../ActionBar';
-import './index.css';
+import { CodeCell } from '../CodeCell';
+import { TextEditor } from '../TextEditor';
+import { ActionBar } from '../ActionBar';
+import { StyledCellListItem } from './CellListItem.style';
 
 interface CellListItemProps {
   cell: Cell;
 }
 
-const CellListItem: React.FC<CellListItemProps> = ({ cell }) => {
+export const CellListItem: React.FC<CellListItemProps> = ({ cell }) => {
   const child = useMemo((): JSX.Element => {
     if (cell.type === 'code') {
       return (
@@ -30,7 +30,5 @@ const CellListItem: React.FC<CellListItemProps> = ({ cell }) => {
     }
   }, [cell]);
 
-  return <div className='cell-list-item'>{child}</div>;
+  return <StyledCellListItem>{child}</StyledCellListItem>;
 };
-
-export default CellListItem;

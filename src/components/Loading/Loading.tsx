@@ -1,12 +1,12 @@
 import React from 'react';
-import './Loading.css';
+import { StyledLoading } from './Loading.style';
 
 export const Loading: React.FC = () => {
   return (
-    <div className='loading-wrapper'>
+    <StyledLoading>
       <progress className='progress is-small is-primary' max='100'>
         Loading
       </progress>
-    </div>
+    </StyledLoading>
   );
 };

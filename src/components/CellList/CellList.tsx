@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { useTypedSelector } from '../../hooks';
-import CellListItem from '../CellListItem';
-import AddCellDivider from '../AddCellDivider';
+import { CellListItem } from '../CellListItem';
+import { AddCellDivider } from '../AddCellDivider';
 
-const CellList: React.FC = () => {
+export const CellList: React.FC = () => {
   const cells = useTypedSelector(({ cells: { data, order } }) => order.map((id) => data[id]));
 
   const renderedCells = cells.map((cell) => (
@@ -20,5 +20,3 @@ const CellList: React.FC = () => {
     </div>
   );
 };
-
-export default CellList;
