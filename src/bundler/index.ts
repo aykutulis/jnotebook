@@ -24,6 +24,8 @@ const bundler = async (rawCode: string) => {
         global: 'window',
       },
       logLimit: 0,
+      jsxFactory: '_React.createElement',
+      jsxFragment: '_React.Fragment',
     });
     return {
       code: result.outputFiles[0].text,

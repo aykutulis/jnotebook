@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useTypedSelector } from '../../hooks';
 import { CellListItem } from '../CellListItem';
 import { AddCellDivider } from '../AddCellDivider';
+import { StyledCellList } from './CellList.style';
 
 export const CellList: React.FC = () => {
   const cells = useTypedSelector(({ cells: { data, order } }) => order.map((id) => data[id]));
@@ -14,9 +15,9 @@ export const CellList: React.FC = () => {
   ));
 
   return (
-    <div>
+    <StyledCellList>
       <AddCellDivider prevCellId={null} forceVisible={cells.length === 0} />
       {renderedCells}
-    </div>
+    </StyledCellList>
   );
 };
