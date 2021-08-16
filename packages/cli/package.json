@@ -9,6 +9,8 @@
   "author": "Aykut Ulış",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^16.6.1",
+    "commander": "^8.1.0",
     "local-api": "^1.0.0"
   },
   "devDependencies": {
