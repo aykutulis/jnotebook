@@ -1,0 +1,17 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "tsc --watch --preserveWatchOutput"
+  },
+  "keywords": [],
+  "author": "Aykut Ulış",
+  "license": "ISC",
+  "dependencies": {
+    "local-api": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
