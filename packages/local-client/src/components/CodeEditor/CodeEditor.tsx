@@ -1,6 +1,6 @@
 import React from 'react';
 import Editor, { OnChange, OnMount } from '@monaco-editor/react';
-import prettier from 'prettier';
+import { format } from 'prettier';
 import parserBabel from 'prettier/parser-babel';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
@@ -18,15 +18,13 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, inpu
     if (!onFormat) return;
 
     try {
-      const formatted = prettier
-        .format(input, {
-          parser: 'babel',
-          plugins: [parserBabel],
-          useTabs: false,
-          semi: true,
-          singleQuote: true,
-        })
-        .replace(/\n$/, '');
+      const formatted = format(input, {
+        parser: 'babel',
+        plugins: [parserBabel],
+        useTabs: false,
+        semi: true,
+        singleQuote: true,
+      }).replace(/\n$/, '');
       onFormat(formatted);
     } catch (error) {
       console.log(error);
