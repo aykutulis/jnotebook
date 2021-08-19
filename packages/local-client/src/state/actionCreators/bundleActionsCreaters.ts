@@ -1,9 +1,9 @@
 import bundler from '../../bundler';
 import { Dispatch } from 'redux';
-import { BundleAction } from '../actions';
+import { Action } from '../actions';
 import { BundleActionType } from '../actionTypes';
 
-export const createBundle = (cellId: string, input: string) => async (dispatch: Dispatch<BundleAction>) => {
+export const createBundle = (cellId: string, input: string) => async (dispatch: Dispatch<Action>) => {
   dispatch({
     type: BundleActionType.BUNDLE_START,
     payload: {
