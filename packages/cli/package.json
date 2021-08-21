@@ -1,19 +1,29 @@
 {
-  "name": "cli",
+  "name": "jpen",
   "version": "1.0.0",
-  "description": "",
+  "description": "A CLI to launch an interactive development environment for writing and documenting code",
+  "bin": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "tsc --watch --preserveWatchOutput"
+    "start": "tsc --watch --preserveWatchOutput",
+    "prepublishOnly": "esbuild --target=node12 src/index.ts --platform=node --outfile=dist/index.js --bundle --minify --define:process.env.NODE_ENV=\\\"production\\\""
   },
   "keywords": [],
   "author": "Aykut Ulış",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^16.6.1",
-    "commander": "^8.1.0",
-    "local-api": "^1.0.0"
+    "@jpen/local-client": "^0.1.0"
   },
   "devDependencies": {
+    "@types/node": "^16.6.1",
+    "@jpen/local-api": "^1.0.0",
+    "commander": "^8.1.0",
+    "esbuild": "^0.12.21",
     "typescript": "^4.3.5"
   }
 }

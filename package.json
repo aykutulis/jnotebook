@@ -5,6 +5,7 @@
     "lerna": "^4.0.0"
   },
   "scripts": {
-    "start": "lerna run start --parallel"
+    "dev": "lerna run start --parallel",
+    "new-version": "lerna version --conventional-commits --yes"
   }
 }

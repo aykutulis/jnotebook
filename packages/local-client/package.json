@@ -1,8 +1,13 @@
 {
-  "name": "local-client",
+  "name": "@jpen/local-client",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@monaco-editor/react": "^4.2.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -24,7 +29,7 @@
     "localforage": "^1.9.0",
     "monaco-editor": "^0.26.1",
     "monaco-jsx-highlighter": "0.0.15",
-    "prettier": "^2.3.2",
+    "prettier": "2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -43,7 +48,8 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublishOnly": "npm run build"
   },
   "eslintConfig": {
     "extends": [
