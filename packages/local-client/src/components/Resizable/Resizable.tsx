@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ResizableBoxProps } from 'react-resizable';
 import { StyledResizable } from './Resizable.style';
 
@@ -7,8 +7,6 @@ interface ResizableProps {
 }
 
 export const Resizable: React.FC<ResizableProps> = ({ direction, children }) => {
-  let resizableProps: ResizableBoxProps;
-
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   const [width, setWidth] = useState(innerWidth * 0.65);
@@ -35,27 +33,29 @@ export const Resizable: React.FC<ResizableProps> = ({ direction, children }) => 
     return () => window.removeEventListener('resize', resizeListener);
   }, [width]);
 
-  if (direction === 'vertical') {
-    resizableProps = {
-      maxConstraints: [Infinity, innerHeight * 0.8],
-      minConstraints: [Infinity, 42],
-      width: Infinity,
-      height: 300,
-      resizeHandles: ['s'],
-    };
-  } else {
-    resizableProps = {
-      className: 'resize-horizontal',
-      maxConstraints: [innerWidth * 0.8, Infinity],
-      minConstraints: [innerWidth * 0.2, Infinity],
-      width: width,
-      height: Infinity,
-      resizeHandles: ['e'],
-      onResizeStop: (e, data) => {
-        setWidth(data.size.width);
-      },
-    };
-  }
+  const resizableProps = useMemo<ResizableBoxProps>(() => {
+    if (direction === 'vertical') {
+      return {
+        maxConstraints: [Infinity, innerHeight * 0.8],
+        minConstraints: [Infinity, 42],
+        width: Infinity,
+        height: 350,
+        resizeHandles: ['s'],
+      };
+    } else {
+      return {
+        className: 'resize-horizontal',
+        maxConstraints: [innerWidth * 0.8, Infinity],
+        minConstraints: [innerWidth * 0.2, Infinity],
+        width: width,
+        height: Infinity,
+        resizeHandles: ['e'],
+        onResizeStop: (e, data) => {
+          setWidth(data.size.width);
+        },
+      };
+    }
+  }, [direction, width, innerWidth, innerHeight]);
 
   return <StyledResizable {...resizableProps}>{children}</StyledResizable>;
 };

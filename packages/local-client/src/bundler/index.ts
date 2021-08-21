@@ -2,18 +2,15 @@ import * as esbuild from 'esbuild-wasm/esm/browser';
 import { unpkgPathPlugin } from './plugins/unpkgPathPlugin';
 import { fetchPlugin } from './plugins/fetchPlugin';
 
-let isInitialized = false;
+export const startService = async () => {
+  await esbuild.initialize({
+    worker: true,
+    wasmURL: 'https://unpkg.com/esbuild-wasm@0.12.15/esbuild.wasm',
+  });
+};
 
-const bundler = async (rawCode: string) => {
+export const bundler = async (rawCode: string) => {
   try {
-    if (!isInitialized) {
-      await esbuild.initialize({
-        worker: true,
-        wasmURL: 'https://unpkg.com/esbuild-wasm@0.12.15/esbuild.wasm',
-      });
-      isInitialized = true;
-    }
-
     const result = await esbuild.build({
       entryPoints: ['index.js'],
       bundle: true,

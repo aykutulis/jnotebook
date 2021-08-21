@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Editor, { OnChange, OnMount } from '@monaco-editor/react';
 import { format } from 'prettier';
 import parserBabel from 'prettier/parser-babel';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
 import { StyledCodeEditor } from './CodeEditor.style';
+
+const handleEditorOnMount: OnMount = (monacoEditor) => {
+  const highlighter = new Highlighter(
+    // @ts-ignore
+    window.monaco,
+    codeShift,
+    monacoEditor
+  );
+  highlighter.highLightOnDidChangeModelContent(
+    () => {},
+    () => {},
+    undefined,
+    () => {}
+  );
+};
 
 interface CodeEditorProps {
   onChange: OnChange;
@@ -14,7 +29,7 @@ interface CodeEditorProps {
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, input, initialValue }) => {
-  const handleOnFormat = () => {
+  const handleOnFormat = useCallback(() => {
     if (!onFormat) return;
 
     try {
@@ -29,22 +44,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, onFormat, inpu
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleEditorOnMount: OnMount = (monacoEditor) => {
-    const highlighter = new Highlighter(
-      // @ts-ignore
-      window.monaco,
-      codeShift,
-      monacoEditor
-    );
-    highlighter.highLightOnDidChangeModelContent(
-      () => {},
-      () => {},
-      undefined,
-      () => {}
-    );
-  };
+  }, [onFormat, input]);
 
   return (
     <StyledCodeEditor>
