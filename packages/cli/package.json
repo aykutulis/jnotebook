@@ -1,6 +1,6 @@
 {
   "name": "jpen",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A CLI to launch an interactive development environment for writing and documenting code",
   "bin": "dist/index.js",
   "publishConfig": {
@@ -17,10 +17,10 @@
   "author": "Aykut Ulış",
   "license": "ISC",
   "dependencies": {
-    "@jpen/local-client": "^1.0.1"
+    "@jpen/local-client": "^1.0.2"
   },
   "devDependencies": {
-    "@jpen/local-api": "^1.0.1",
+    "@jpen/local-api": "^1.0.2",
     "@types/node": "^16.6.1",
     "commander": "^8.1.0",
     "esbuild": "^0.12.21",
