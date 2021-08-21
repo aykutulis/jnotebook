@@ -1,6 +1,6 @@
 {
   "name": "jnotebook",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A CLI to launch an interactive development environment for writing and documenting code",
   "bin": "dist/index.js",
   "publishConfig": {
@@ -17,10 +17,10 @@
   "author": "Aykut Ulış",
   "license": "ISC",
   "dependencies": {
-    "@jnotebook/local-client": "^1.1.0"
+    "@jnotebook/local-client": "^1.1.1"
   },
   "devDependencies": {
-    "@jnotebook/local-api": "^1.1.0",
+    "@jnotebook/local-api": "^1.1.1",
     "@types/node": "^16.6.1",
     "commander": "^8.1.0",
     "esbuild": "^0.12.21",
