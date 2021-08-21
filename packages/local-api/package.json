@@ -1,5 +1,5 @@
 {
-  "name": "@jpen/local-api",
+  "name": "@jnotebook/local-api",
   "version": "1.0.2",
   "description": "",
   "files": [
@@ -23,7 +23,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@jpen/local-client": "^1.0.2",
+    "@jnotebook/local-client": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1"
